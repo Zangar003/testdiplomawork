@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title> 
+    <link rel="stylesheet" href="static/templates/styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@600&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+   
+    <div class="logo" style="text-align: center; margin:20px 0 40px;"><a href="static/templates/index.html"><img src="static/templates/images/logo.svg"></a></div>
+    
+
+    <h1 class="title">Регистрация</h1>
+    <form method="POST" action="/signup" >
+    <div class="form">
+        <p style="margin-bottom: 40px;font-family: 'Roboto'; font-size: 24px;">Введите данные для регистрации</p>
+        <div class="form__group">
+            <input name ="Name" class="form__input" type="text" placeholder=" ">
+            <label class="form__label">Имя</label>
+        </div>
+        <div class="form__group">
+            <input name ="Surname" class="form__input" type="text" placeholder=" ">
+            <label class="form__label">Фамилия</label>
+        </div>
+        <div class="form__group">
+            <input name ="Iin" class="form__input" type="number" placeholder=" ">
+            <label class="form__label">ЖСН/ИИН</label>
+        </div>
+        <div class="form__group">
+            <input name ="Password" class="form__input" type="password" placeholder=" ">
+            <label class="form__label">Пароль</label>
+        </div>
+        <div class="form__group">
+            <input name ="Phone" class="form__input" type="tel" placeholder=" ">
+            <label class="form__label">Номер телефона</label>
+        </div>
+        <a href="static/templates/login.html" class="link-auth" style="margin-bottom: 40px;font-family: 'Roboto'; font-size: 20px; text-decoration: none;">Уже зарегестрированы?</a>
+        <!-- <a href="#" class="register-button" style="font-size: 24px;;">Зарегестрироваться</a> -->
+        <input class="register-button" style="font-size: 24px;" type="submit" value="Зарегестрироваться">
+    </div>
+    </form>
+</body>
+</html>

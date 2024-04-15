@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #58D5F0;
+;
+}
+
+.header .logo {
+  font-size: 35px;
+  font-family: 'Montagu Slab';
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 40px;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.nav-items a {
+
+  font-size: 25px;
+  text-decoration: none;
+  color: #fff;
+  padding: 35px 20px;
+}
+
+.card { 
+  margin: 10px 0;
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  padding: 40px 200px;
+  height: 500px;
+  border-top: 2px solid #eeeeee;
+}
+.card p { 
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 200px;
+  height: 500px;
+  border-top: 2px solid #eeeeee;
+}
+
+button{
+  background-color: #58D5F0;
+  margin: 10px 0;
+}
+
+.achievements {
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.achievements .work {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0px;
+}
+
+.achievements .work i {
+  width: fit-content;
+  font-size: 50px;
+  color: #333333;
+  border-radius: 50%;
+  border: 2px solid #333333;
+  padding: 12px;
+}
+
+logo.png {
+  radius: 50%;
+}
+.achievements .work .work-heading {
+  font-size: 20px;
+  color: #fff;
+  height: 100px;
+  width: 600px;
+  background-color: #58D5F0;
+  margin: 10px 0;
+  border: none;
+}
+
+.achievements .work .work-heading button{
+  background-color: #58D5F0;
+  margin: 10px 0;
+}
+
+
+.achievements .work .work-text {
+  font-size: 15px;
+  color: #fff;
+  margin: 10px 0;
+}
+
+.news {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 200px;
+  border-top: 2px solid #eeeeee;
+}
+
+.news img{
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+
+//*
+.newstext h2 {
+  font-size: 30px;
+  color: #333333;
+  text-transform: uppercase;
+  margin: 0;
+}
+*//
+.news-text p {
+  font-size: 15px;
+  color: #585858;
+  margin: 100px 200px;  
+  padding: 40px 200px;
+}
+/* CSS for footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #58D5F0;
+  padding: 40px 80px;
+}
+
+.footer .copy {
+  color: #fff;
+}
+.footer img{
+  img size: 40px 40px;
+}
+.bottom-links {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+.bottom-links .links {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  padding: 0 100px;
+}
+
+
+.bottom-links .links a {
+  text-decoration: none;
+  color: #a1a1a1;
+  padding: 10px 20px;
+  justify-content: center;
+}

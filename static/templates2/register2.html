@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Login</title>
+    <style>
+      .google-icon svg {
+        width: 24px; /* Adjust the width as needed */
+        height: 24px; /* Adjust the height as needed */
+      }
+    </style>
+  </head>
+<body>
+  <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand logo" href="#">Qolday</a>
+    </nav>
+  </header>
+        <main class="container my-5">
+          <section class="form">
+            <h1 class="text-center mb-4">Sign Up</h1>
+            <div class="log-form">
+            <form method="POST" action="/signup" class="mx-auto" style="max-width: 400px;">
+              <div class="form-group">
+                <input class="form-control loginInfo login" style = "margin-bottom: 10px;" name="Name" placeholder="Name" type="text" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control loginInfo login" name="Surname" placeholder="Surname" type="text" required>
+              </div>
+              <div class="form-group">  
+                <input class="form-control loginInfo login" name ="Iin" placeholder="ИИН" type="number" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control loginInfo password" name ="Password" placeholder="Password" type="password" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control loginInfo login" name ="Phone" placeholder="Phone" type="number" required>
+              </div>
+              <div class="form-group">  
+                <input class="form-control loginInfo login" name ="City" placeholder="City" type="text" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control loginInfo login" name ="Nationality" placeholder="Nationality" type="text" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control loginInfo login" name ="Age" placeholder="age" type="number" required >
+              </div>
+              <div class="registration text-center mb-3">
+                    <a href="/login">I have an account</a>
+              </div>
+              <div class="text-center">
+                <input class="btn btn-primary loginBtn" type="submit" value="Sign Up">
+              </div>
+            </form> 
+            <br> 
+            <div class="text-center mb-3">
+              <a href="/auth/google/login" class="btn btn-outline-danger">
+                <span class="google-icon me-2">
+                  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" fill="#FFC107"/>
+                    <path d="M48 24c0-2.9-.7-5.7-1.9-8.2l-7.9 6.1c.6 1.7.8 3.5.8 5.3 0 6-1.9 11.4-5.1 15.4H48c0-4.4 0-8.8 0-13.2 0-1.8 0-3.5 0-5.4z" fill="#EA4335"/>
+                    <path d="M24 48c6.5 0 12.3-2.2 16.5-5.9H24V35.6c-3.2 1.8-6.9 2.8-10.7 2.8-8.3 0-15.3-5.5-17.8-13H1.1v6.5C6.9 41.7 15.1 48 24 48z" fill="#4285F4"/>
+                    <path d="M6.2 28.5H12c.5-3.1 3.1-5.5 6.2-5.5 3.5 0 6.3 2.9 6.3 6.3s-2.8 6.3-6.3 6.3c-2.5 0-4.6-1.3-5.8-3.2l-4.2 4.2C10.9 40.2 17 44 24 44c7.2 0 13-5.8 13-13s-5.8-13-13-13c-5.9 0-10.9 3.9-12.8 9.5z" fill="#34A853"/>
+                  </svg>
+                </span>
+                Sign in with Google
+              </a>
+            </div>        
+          </section>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

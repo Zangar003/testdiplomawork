@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Upload Files </title>
+    <!-- Bootstrap CSS -->
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/assets/css/styles.css">
+	<link rel="stylesheet" href="static/assets/css/responsive.css">
+{{/* <style>
+  div.upload-list:empty {
+   display: none;
+}
+
+	</style> */}} 
+
+  	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	 -->
+	<style>
+		.all{
+                display: flex;
+				
+            }
+            .left{
+               
+                width: 65%;
+                height: auto;
+                padding-top: 60px;
+                text-align: center;
+				margin-left: 10%;
+                /* margin: 100px 100px 100px 100px; */
+               
+             
+                
+            }
+		.input{
+			   border-color: black;
+			   border-width: 2px;
+			   border-style: solid;
+			   width: 450px;
+			   height: 50px;
+			   border-radius: 6px;
+			   font-size: 20px;
+			   padding-left: 10px;
+		   margin-top: 10px;
+    	}
+		
+		
+		
+		
+		
+		
+   </style>
+</head>
+
+  <body>
+	
+  	
+<div class="upload-wrap" id="myid">
+ <div class ="all">
+	<div class ="left">
+		<h2 style="text-align: center;">Upload your File </h2>	
+			<form method="post" action="/uploadfiles" enctype="multipart/form-data">
+			    
+				<input class="form-control" type="text" name ="text" placeholder="text"><br>
+			
+				<input   class="form-control" type="text" name ="region" placeholder="region"><br> 
+			 
+				
+				 <div class="custom-file">
+					<input  name="files" type="file" class="custom-file-input" id="validatedCustomFile" multiple required>
+					<label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+					<div class="invalid-feedback">Example invalid custom file feedback</div>
+				  </div>
+				 <button style="margin: 20px;" type="submit" class="btn btn-primary">Submit</button>	
+			</form>
+		</div>
+										
+	</div>
+	</div>
+
+  </body>
+
+ </html>

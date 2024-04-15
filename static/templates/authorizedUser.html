@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@600&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="images/logo.svg"></div>
+        <nav>
+            <a href="#" class="active">Главная</a>
+            <a href="#">Новости</a>
+            <a href="#">Решения</a>
+            <a href="#">Гражданам</a>
+            <a href="#">Проект</a>
+        </nav>
+
+          <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn profile-dropdown">Батырбек Т. <img src="images/lets-icons_down.svg"></button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">Профиль</a>
+              <a href="myrequests.html">Мои заявки</a>
+              <a href="#">Создать обращение</a>
+            </div>
+          </div>
+
+
+    </header>
+
+    <hr style="color: F0F0F0;">
+    
+    <div class="container">
+        <div class="text-block">
+            <h1>Электронная платформа EBailanys</h1>
+            <p style="margin-bottom:50px;">Свяжитесь с госорганами вашего города (района) прямо с нашего сайта.</p>
+            <div class="buttons">
+                <a href="#" class="whiteBtn">О проекте</a>
+                <a href="#" class="defaultBtn">Зарегистрироваться</a>
+            </div>
+            <p style="font-size: 14px;">Всегда удобно — не нужно ждать очереди</p>
+        </div>
+        <div class="image-block">
+            <img src="images/IMAGE.png" alt="Изображение">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="text-block">
+            <h1 style="margin-bottom: 30px;">Столкнулись с проблемой в своем городе?</h1>
+            <p style="margin-bottom: 30px;">Вы можете сразу же создавать управлять своими заявками / обращениями в одном сайте. Все корректные заявки не останутся без ответа</p>
+            <a style="font-family: 'Roboto';" href="#">Узнать больше</a>
+        </div>
+        <div class="image-block">
+            <img src="images/IMAGE2.png" alt="Изображение">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image-block">
+            <img src="images/IMAGE3.png" alt="Изображение">
+        </div>
+        <div class="text-block">
+            <h1 style="margin-bottom: 30px;">Не нужно стоять в очереди</h1>
+            <p style="margin-bottom: 30px;">Не нужно никуда ехать отправляйте свои запросы прямо из дома и ожидайте ответа оператора</p>
+            <a style="font-family: 'Roboto';" href="#">Узнать больше</a>
+        </div>
+    </div>
+
+    <footer>
+        <img src="images/appstore.svg">
+        <img src="images/googleplay.svg">
+    </footer>
+
+
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        </script>
+</html>

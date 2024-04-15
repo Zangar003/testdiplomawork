@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@600&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="images/logo.svg"></div>
+    <nav class="nav">
+        <a href="#" class="active">Главная</a>
+        <a href="#">Новости</a>
+        <a href="#">Решения</a>
+        <a href="#">Гражданам</a>
+        <a href="#">Проект</a>
+        <a href="register.html" class="register-button">Регистрация</a>
+
+    </nav>
+    
+    <div class="burger">
+        <span></span>
+    </div>
+  </header>
+
+    <hr style="color: F0F0F0;">
+    
+    <h1 class="title">Мои заявки</h1>
+  
+      <div class="sortAdd">
+          <p clas="sort">Статус<img src="images/lets-icons_down.svg"></p>
+          <a class="btnAdd"href="newrequest.html">Создать новое</a>
+      </div>
+
+    <div class="listOfRequests">
+        <div class="request">
+            <img class="requestImg" src="images/IMAGE.png">
+            <div class="info">
+                <div class="nameAndTime">
+                    <p class="name">Дорожные проблемы / Алматы</span>
+                    <p class="time">04.02.23 11:21</span>
+                </div>
+                <span class="description">Описание для данной заявки. How do you create a user experience that customers find usable and delightful? Designing a great UX requires skill in several different areas, collectively known as UX design. </span>
+                <span class="status">Статус: В процессе</span>
+                <a href="chat.html" class="btnAdd">В чат</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+      <div>
+          <img src="images/appstore.svg">
+          <img src="images/googleplay.svg">
+      </div>
+      <div class="footer__links">
+          <a href="#">Условия пользования</a>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Управление файлами cookies</a>
+      </div>
+  </footer>
+</body>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        document.querySelector('.burger').addEventListener('click', function(){
+              this.classList.toggle('open');
+              document.querySelector('nav').classList.toggle('openmenu');
+          })
+        </script>
+
+</html>
+
+
+
+
+
+

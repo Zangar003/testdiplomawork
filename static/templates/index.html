@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="static/templates/styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@600&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="static/templates/images/logo.svg"></div>
+        <nav class="nav">
+            <a href="#" class="active">Главная</a>
+            <a href="#">Новости</a>
+            <a href="#">Решения</a>
+            <a href="#">Гражданам</a>
+            <a href="#">Проект</a>
+            <a href="/signup" class="register-button">Регистрация</a>
+
+        </nav>
+        
+        <div class="burger">
+            <span></span>
+        </div>
+    </header>
+
+    <hr style="color: F0F0F0;">
+    
+    <div class="container">
+        <div class="text-block">
+            <h1>Электронная платформа EBailanys</h1>
+            <p style="margin-bottom:50px;">Свяжитесь с госорганами вашего города (района) прямо с нашего сайта.</p>
+            <div class="buttons">
+                <a href="#" class="whiteBtn">О проекте</a>
+                <a href="/signup" class="defaultBtn">Зарегистрироваться</a>
+            </div>
+            <p style="font-size: 14px;">Всегда удобно — не нужно ждать очереди</p>
+        </div>
+        <div class="image-block">
+            <img src="static/templates/images/IMAGE.png" alt="Изображение">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="text-block">
+            <h1 style="margin-bottom: 30px;">Столкнулись с проблемой в своем городе?</h1>
+            <p style="margin-bottom: 30px;">Вы можете сразу же создавать управлять своими заявками / обращениями в одном сайте. Все корректные заявки не останутся без ответа</p>
+            <a style="font-family: 'Roboto';" href="#">Узнать больше</a>
+        </div>
+        <div class="image-block">
+            <img src="static/templates/images/IMAGE2.png" alt="Изображение">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image-block">
+            <img src="static/templates/images/IMAGE3.png" alt="Изображение">
+        </div>
+        <div class="text-block">
+            <h1 style="margin-bottom: 30px;">Не нужно стоять в очереди</h1>
+            <p style="margin-bottom: 30px;">Не нужно никуда ехать отправляйте свои запросы прямо из дома и ожидайте ответа оператора</p>
+            <a style="font-family: 'Roboto';" href="#">Узнать больше</a>
+        </div>
+    </div>
+
+    <footer>
+        <div>
+            <img src="static/templates/images/appstore.svg">
+            <img src="static/templates/images/googleplay.svg">
+        </div>
+        <div class="footer__links">
+            <a href="#">Условия пользования</a>
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Управление файлами cookies</a>
+        </div>
+    </footer>
+
+
+    <script>
+        document.querySelector('.burger').addEventListener('click', function(){
+            this.classList.toggle('open');
+            document.querySelector('nav').classList.toggle('openmenu');
+        })
+    </script>
+
+</body>
+
+</html>
