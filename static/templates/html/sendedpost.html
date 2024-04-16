@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    
 
     <meta name="description" content="" />
 
@@ -106,7 +106,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2"></span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -214,55 +214,12 @@
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                    placeholder="Search..."
-                    aria-label="Search..." />
-                </div>
-              </div>
-              <!-- /Search -->
-
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-                <li class="nav-item lh-1 me-3">
-                  <a
-                    class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
-                  >
-                </li>
-
+              
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                  </a>
+                  
                   <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-medium d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
+                    
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -303,8 +260,7 @@
             </div>
           </nav>
 
-          / Navbar
-          {{/* {{$length:= len . }} {{ if gt $length 0 }} */}}
+            {{/* {{$length:= len . }} {{ if gt $length 0 }} */}}
           {{/* {{ if gt .Count 0 }} */}}
           {{if . }}
          
@@ -321,13 +277,16 @@
                           <h5 class="card-title text-primary">Posts 🎉</h5>
                           <p class="mb-4">
                             <table style="width: 100%;" class="table">
+                              
                                 <thead>
                                   <tr>
                                     <th scope="col">id</th>
                                     <th scope="col">image</th>
                                     <th scope="col">title</th>
                                     <th scope="col">region</th>
-                                    <th scope="col">image path</th>
+                                    
+                                    <th scope="col"> chat</th>
+                                    <th scope="col">Status</th>
                                   </tr>
                                 </thead>
                                 {{ range . }}
@@ -339,9 +298,22 @@
                             
                                     <td>{{ .Title }}</td>
                                     <td>{{ .Region }}</td>
-                                    <td>{{ .Path }}</td>
-                                    <td><a href="/chat">Chat</a></td>                                    
+                                    
+                                    <td><a href="/chat">Chat</a></td> 
+                                    <td style="color: green;">{{ .Status }}</td>  
+                                    <td style="display: flex; flex-direction: row; width: 100px;">
+                                      
+                                      <a href="/accept?id={{ .ID }}" style="margin-right: 10px;" type="submit"   id="regionButton" class="btn btn-primary  filter-button"  >Принять </a>
+                                      <a href="/refuse?id={{ .ID }}" style="margin-right: 10px;" type="submit"   id="regionButton" class="btn btn-primary  filter-button"  >Отказать </a>
+                                      <a href="/ready?id={{ .ID }}" style="margin-right: 10px;" type="submit"  id="regionButton" class="btn btn-primary  filter-button" >Готово </a>       
+                                      <a href="/admin_watch_post?id={{ .ID }}" style="margin-right: 10px;" type="submit"  id="regionButton" class="btn btn-outline-primary filter-button" >Читать </a> 
+                                    </td>                                 
                                   </tr>
+                                  
+                           
+                                     
+                                 
+                           
                           
                                 </tbody> 
                                 {{ end }}
@@ -352,7 +324,7 @@
 
                         </div>
                       </div>
-                      <div class="col-sm-5 text-center text-sm-left">
+                      <!-- <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
                           <img
                             src="static/templates/assets/img/illustrations/man-with-laptop-light.png"
@@ -361,102 +333,16 @@
                             data-app-dark-img="illustrations/man-with-laptop-dark.png"
                             data-app-light-img="illustrations/man-with-laptop-light.png" />
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
                                 <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-                  <div class="card">
-                    <div class="row row-bordered g-0">
-                      <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                        <div id="totalRevenueChart" class="px-2"></div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card-body">
-                          <div class="text-center">
-                            <div class="dropdown">
-                              <button
-                                class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                type="button"
-                                id="growthReportId"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                2022
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="growthChart"></div>
-                        <div class="text-center fw-medium pt-3 mb-2">62% Company Growth</div>
-
-                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2022</small>
-                              <h6 class="mb-0">$32.5k</h6>
-                            </div>
-                          </div>
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2021</small>
-                              <h6 class="mb-0">$41.2k</h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                             <div class="row">
-                  
-              </div>
-            </div>
+                 
             <!-- / Content -->
 
             <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer>
+            
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
@@ -471,14 +357,6 @@
     </div>
     <!-- / Layout wrapper -->
 
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/item/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

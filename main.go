@@ -115,7 +115,7 @@ func loginPage(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	http.Redirect(res, req, "/home?userID="+userID, 301)
+	http.Redirect(res, req, "/admin_index?userID="+userID, 301)
 
 	defer db.Close()
 }
@@ -131,84 +131,84 @@ type upfile struct {
 
 var tmpl = template.Must(template.ParseGlob("static/templates/*.html"))
 
-func main_page(w http.ResponseWriter, r *http.Request) {
+// func main_page(w http.ResponseWriter, r *http.Request) {
 
-	db, err := dbConn()
-	if err != nil {
-		log.Println("Failed to connect to the database:", err)
-		return
-	}
-	defer db.Close()
-	var selDB *sql.Rows
-	if r.Method == "POST" {
-		region := r.FormValue("region")
-		city := r.FormValue("city")
+// 	db, err := dbConn()
+// 	if err != nil {
+// 		log.Println("Failed to connect to the database:", err)
+// 		return
+// 	}
+// 	defer db.Close()
+// 	var selDB *sql.Rows
+// 	if r.Method == "POST" {
+// 		region := r.FormValue("region")
+// 		city := r.FormValue("city")
 
-		fmt.Println("region ---", region)
+// 		fmt.Println("region ---", region)
 
-		if region == "region" {
-			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", region)
-			selDB = sel
-			if err != nil {
-				panic(err.Error())
-			}
-		} else if city == "city" {
-			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", city)
-			selDB = sel
-			if err != nil {
-				panic(err.Error())
-			}
-		}
+// 		if region == "region" {
+// 			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", region)
+// 			selDB = sel
+// 			if err != nil {
+// 				panic(err.Error())
+// 			}
+// 		} else if city == "city" {
+// 			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", city)
+// 			selDB = sel
+// 			if err != nil {
+// 				panic(err.Error())
+// 			}
+// 		}
 
-	} else {
-		sel, err := db.Query("SELECT * FROM diplom.upload")
-		selDB = sel
-		if err != nil {
-			panic(err.Error())
-		}
-	}
+// 	} else {
+// 		sel, err := db.Query("SELECT * FROM diplom.upload")
+// 		selDB = sel
+// 		if err != nil {
+// 			panic(err.Error())
+// 		}
+// 	}
 
-	userID := r.URL.Query().Get("userID")
-	r.Header.Set("User-ID", userID)
+// 	userID := r.URL.Query().Get("userID")
+// 	r.Header.Set("User-ID", userID)
 
-	// var selDB *sql.Rows
-	// sel, err := db.Query("SELECT * FROM diplom.upload")
-	// selDB = sel
-	// if err != nil {
-	// 	panic(err.Error())
-	// }
-	// defer sel.Close()
+// 	// var selDB *sql.Rows
+// 	// sel, err := db.Query("SELECT * FROM diplom.upload")
+// 	// selDB = sel
+// 	// if err != nil {
+// 	// 	panic(err.Error())
+// 	// }
+// 	// defer sel.Close()
 
-	upld := upfile{}
-	res := []upfile{}
+// 	upld := upfile{}
+// 	res := []upfile{}
 
-	for selDB.Next() {
-		var id int
-		var title, text, region, path string
+// 	for selDB.Next() {
+// 		var id int
+// 		var title, text, region, path string
 
-		err = selDB.Scan(&id, &title, &text, &region, &path)
-		if err != nil {
-			panic(err.Error())
-		}
-		upld.ID = id
-		upld.Title = title
-		upld.Text = text
-		upld.Region = region
-		upld.Path = path
+// 		err = selDB.Scan(&id, &title, &text, &region, &path)
+// 		if err != nil {
+// 			panic(err.Error())
+// 		}
+// 		upld.ID = id
+// 		upld.Title = title
+// 		upld.Text = text
+// 		upld.Region = region
+// 		upld.Path = path
 
-		res = append(res, upld)
-	}
-	upld.Count = len(res)
+// 		res = append(res, upld)
+// 	}
+// 	upld.Count = len(res)
 
-	if upld.Count > 0 {
-		tmpl.ExecuteTemplate(w, "main.html", res)
-	} else {
-		tmpl.ExecuteTemplate(w, "main.html", nil)
-	}
+// 	if upld.Count > 0 {
+// 		tmpl.ExecuteTemplate(w, "authorizedUser.html", res)
+// 	} else {
+// 		tmpl.ExecuteTemplate(w, "authorizedUser.html", nil)
+// 	}
 
-	db.Close()
+// 	db.Close()
 
-}
+// }
 func uploadFiles(w http.ResponseWriter, r *http.Request) {
 
 	db, err := dbConn()
@@ -404,12 +404,6 @@ func Admin(w http.ResponseWriter, r *http.Request, userID string) {
 
 	var selDB *sql.Rows
 
-	// sel, err := db.Query("SELECT sing_up.id, sing_up.name, sing_up.surname, sing_up.iin, sing_up.password_, sing_up.phone, sing_up.city,sing_up.nationality, sing_up.age , admin_image.path from sing_up INNER JOIN admin_image on sing_up.id = admin_image.id WHERE sing_up.id = ?", userID)
-	// if err != nil {
-	// 	http.Error(w, "Error querying database", http.StatusInternalServerError)
-	// 	log.Println("Error querying database:", err)
-	// 	return
-	// }
 	sel, err := db.Query("SELECT * from sing_up where id = ?", userID)
 	if err != nil {
 		http.Error(w, "Error querying database", http.StatusInternalServerError)
@@ -694,7 +688,7 @@ func OauthGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Redirect the user to the homepage
-	http.Redirect(w, r, "/home", http.StatusFound)
+	http.Redirect(w, r, "/admin_index", http.StatusFound)
 }
 
 func generateStateOauthCookie(w http.ResponseWriter) string {
@@ -1012,11 +1006,12 @@ func Send(w http.ResponseWriter, r *http.Request, userId string) {
 	}
 	if r.Method != "POST" {
 
-		http.ServeFile(w, r, "static/templates/sendmessage.html")
+		http.ServeFile(w, r, "static/templates/newrequest.html")
 		return
 	}
 	title := r.FormValue("title")
 	region := r.FormValue("region")
+	text := r.FormValue("description")
 
 	r.ParseMultipartForm(200000)
 	if r == nil {
@@ -1048,13 +1043,14 @@ func Send(w http.ResponseWriter, r *http.Request, userId string) {
 
 		tempFile.Write(fileBytes)
 
-		insForm, err := db.Prepare("INSERT INTO diplom.send(id, title, region, path) VALUES(?,?,?,?)")
+		insForm, err := db.Prepare("INSERT INTO diplom.send(id, title, region, path, description, Status) VALUES(?,?,?,?,?, ?)")
 		if err != nil {
 			panic(err.Error())
 		} else {
 			log.Println("data insert successfully . . .")
 		}
-		insForm.Exec(userId, title, region, filepath)
+		insForm.Exec(userId, title, region, filepath, text, "В процессе")
+		fmt.Println("userid is :", userId)
 
 		log.Printf("Successfully Uploaded File\n")
 		defer db.Close()
@@ -1070,6 +1066,9 @@ type upfile5 struct {
 	Region string
 	Path   string
 	Count  int
+	Text   string
+	Time   string
+	Status string
 }
 
 func seeSend(w http.ResponseWriter, r *http.Request) {
@@ -1098,9 +1097,10 @@ func seemessage(w http.ResponseWriter, r *http.Request, userID string) {
 
 	for selDB.Next() {
 
-		var id, title, region, path string
+		var id, title, region, path, text string
+		var time, status string
 
-		err = selDB.Scan(&id, &title, &region, &path)
+		err = selDB.Scan(&id, &title, &region, &path, &text, &time, &status)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -1108,15 +1108,18 @@ func seemessage(w http.ResponseWriter, r *http.Request, userID string) {
 		upld.Title = title
 		upld.Region = region
 		upld.Path = path
+		upld.Text = text
+		upld.Time = time
+		upld.Status = status
 
 		res = append(res, upld)
 	}
 	upld.Count = len(res)
 
 	if upld.Count > 0 {
-		tmpl.ExecuteTemplate(w, "seesendmessage.html", res)
+		tmpl.ExecuteTemplate(w, "myrequests.html", res)
 	} else {
-		tmpl.ExecuteTemplate(w, "seesendmessage.html", nil)
+		tmpl.ExecuteTemplate(w, "myrequests.html", nil)
 	}
 
 	db.Close()
@@ -1128,6 +1131,9 @@ type upfile6 struct {
 	Region string
 	Path   string
 	Count  int
+	Text   string
+	Time   string
+	Status string
 }
 
 func admin_see_send_messages(w http.ResponseWriter, r *http.Request) {
@@ -1136,26 +1142,25 @@ func admin_see_send_messages(w http.ResponseWriter, r *http.Request) {
 		log.Println("Failed to connect to the database:", err)
 		return
 	}
-
-	userID := r.URL.Query().Get("userID")
-	r.Header.Set("User-ID", userID)
-
 	var selDB *sql.Rows
+
 	sel, err := db.Query("SELECT * FROM diplom.send")
 	selDB = sel
 	if err != nil {
 		panic(err.Error())
 	}
-	defer sel.Close()
+
+	userID := r.URL.Query().Get("userID")
+	r.Header.Set("User-ID", userID)
 
 	upld := upfile6{}
 	res := []upfile6{}
 
 	for selDB.Next() {
 
-		var id, title, region, path string
+		var id, title, region, path, text, time, status string
 
-		err = selDB.Scan(&id, &title, &region, &path)
+		err = selDB.Scan(&id, &title, &region, &path, &text, &time, &status)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -1163,6 +1168,9 @@ func admin_see_send_messages(w http.ResponseWriter, r *http.Request) {
 		upld.Title = title
 		upld.Region = region
 		upld.Path = path
+		upld.Text = text
+		upld.Time = time
+		upld.Status = status
 
 		res = append(res, upld)
 	}
@@ -1191,6 +1199,167 @@ func Index_page(w http.ResponseWriter, r *http.Request) {
 	db.Close()
 
 }
+func Accept(w http.ResponseWriter, r *http.Request) {
+	db, err := dbConn()
+	if err != nil {
+		log.Println("Failed to connect to the database:", err)
+		return
+	}
+	emp := r.URL.Query().Get("id")
+
+	delForm, err := db.Prepare("Update diplom.send SET Status = 'Ваш заказ принят'  WHERE id =?;")
+	if err != nil {
+		panic(err.Error())
+	}
+	delForm.Exec(emp)
+	log.Println("updtaed successfully", emp)
+	defer db.Close()
+	http.Redirect(w, r, "/admin_see_send_messages", 301)
+}
+func Refuse(w http.ResponseWriter, r *http.Request) {
+	db, err := dbConn()
+	if err != nil {
+		log.Println("Failed to connect to the database:", err)
+		return
+	}
+	emp := r.URL.Query().Get("id")
+	log.Println("Updates successfully", emp)
+	delForm, err := db.Prepare("Update diplom.send SET status = 'Ваш заказ отклонен'  WHERE id =?;")
+	if err != nil {
+		panic(err.Error())
+	}
+	delForm.Exec(emp)
+	log.Println("updtaed successfully", emp)
+	defer db.Close()
+	http.Redirect(w, r, "/admin_see_send_messages", 301)
+}
+func Ready(w http.ResponseWriter, r *http.Request) {
+	db, err := dbConn()
+	if err != nil {
+		log.Println("Failed to connect to the database:", err)
+		return
+	}
+	emp := r.URL.Query().Get("id")
+	log.Println("deleted successfully", emp)
+	delForm, err := db.Prepare("Update diplom.send SET status = 'Ваш заказ готов'  WHERE id =?;")
+	if err != nil {
+		panic(err.Error())
+	}
+	delForm.Exec(emp)
+	log.Println("updtaed successfully", emp)
+	defer db.Close()
+	http.Redirect(w, r, "/admin_see_send_messages", 301)
+}
+func AdminWatchPost(w http.ResponseWriter, r *http.Request) {
+	db, err := dbConn()
+	if err != nil {
+		log.Println("Failed to connect to the database:", err)
+		return
+	}
+	log.Println("Log ")
+	b := r.URL.Query().Get("id")
+
+	var selDB *sql.Rows
+	sel, err := db.Query("SELECT * FROM diplom.send Where id = ?", b)
+	selDB = sel
+	if err != nil {
+		panic(err.Error())
+	}
+	defer sel.Close()
+
+	upld := upfile6{}
+	res := []upfile6{}
+
+	for selDB.Next() {
+		var id string
+		var title, region, path, text, time, status string
+
+		err = selDB.Scan(&id, &title, &region, &path, &text, &time, &status)
+		if err != nil {
+			panic(err.Error())
+		}
+		upld.ID = id
+		upld.Title = title
+		upld.Text = text
+		upld.Region = region
+		upld.Path = path
+		upld.Time = time
+		upld.Status = status
+
+		res = append(res, upld)
+	}
+
+	fmt.Println("id ", b)
+	tmpl.ExecuteTemplate(w, "WatchPost.html", res)
+	defer db.Close()
+
+}
+func AdminIndex(w http.ResponseWriter, r *http.Request) {
+
+	mainindex(w, r, userID)
+	// Photo(w, r, userID)
+}
+
+func mainindex(w http.ResponseWriter, r *http.Request, userID string) {
+	db, err2 := dbConn()
+	if err2 != nil {
+		http.Error(w, "Error connecting to database", http.StatusInternalServerError)
+		log.Println("Error connecting to database:", err)
+		return
+	}
+	defer db.Close()
+
+	var res []upAdmin
+
+	var selDB *sql.Rows
+
+	sel, err := db.Query("SELECT * from sing_up where id = ?", userID)
+	if err != nil {
+		http.Error(w, "Error querying database", http.StatusInternalServerError)
+		log.Println("Error querying database:", err)
+		return
+	}
+	selDB = sel
+	defer sel.Close()
+
+	if selDB.Next() {
+		var id, age int
+		var name, surname, iin, phone, city, nationality, password, path string
+
+		err = selDB.Scan(&id, &name, &surname, &iin, &password, &phone, &city, &nationality, &age, &path)
+		if err != nil {
+			http.Error(w, "Error scanning database row", http.StatusInternalServerError)
+			log.Println("Error scanning database row:", err)
+			return
+		}
+
+		upld := upAdmin{
+			ID:          id,
+			Name:        name,
+			Surname:     surname,
+			Iin:         iin,
+			Phone:       phone,
+			City:        city,
+			Nationality: nationality,
+			Age:         age,
+			Password:    password,
+			Path:        path,
+		}
+		res = append(res, upld)
+
+		// res = append(res, upld) // Append user data to the slice
+	} else {
+		http.Error(w, "User not found", http.StatusNotFound)
+		return
+	}
+
+	if err := tmpl.ExecuteTemplate(w, "authorizedUser.html", res); err != nil {
+		http.Error(w, "Error executing template", http.StatusInternalServerError)
+		log.Println("Error executing template:", err)
+	}
+
+}
+
 func main() {
 
 	db, err := dbConn()
@@ -1216,7 +1385,7 @@ func main() {
 	http.HandleFunc("/login", loginPage)
 	http.HandleFunc("/uploadfiles", uploadFiles)
 	http.HandleFunc("/uploadimage", AdminHandler)
-	http.HandleFunc("/home", main_page)
+	// http.HandleFunc("/home", main_page)
 	http.Handle("/chat", &templateHandler{filename: "chat.html"})
 	http.Handle("/room", r)
 	http.HandleFunc("/profile", AdminHandler)
@@ -1237,6 +1406,12 @@ func main() {
 	http.HandleFunc("/seemessage", seeSend)
 	http.HandleFunc("/admin_see_send_messages", admin_see_send_messages)
 	http.HandleFunc("/index", Index_page)
+	http.HandleFunc("/accept", Accept)
+	http.HandleFunc("/refuse", Refuse)
+	http.HandleFunc("/ready", Ready)
+	http.HandleFunc("/admin_watch_post", AdminWatchPost)
+	http.HandleFunc("/admin_index", AdminIndex)
+
 	go r.run()
 	log.Println("Starting web server on", *addr)
 	log.Println("Server started on: http://localhost:8000")
