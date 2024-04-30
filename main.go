@@ -131,84 +131,79 @@ type upfile struct {
 
 var tmpl = template.Must(template.ParseGlob("static/templates/*.html"))
 
-// func main_page(w http.ResponseWriter, r *http.Request) {
+func News(w http.ResponseWriter, r *http.Request) {
 
-// 	db, err := dbConn()
-// 	if err != nil {
-// 		log.Println("Failed to connect to the database:", err)
-// 		return
-// 	}
-// 	defer db.Close()
-// 	var selDB *sql.Rows
-// 	if r.Method == "POST" {
-// 		region := r.FormValue("region")
-// 		city := r.FormValue("city")
+	db, err := dbConn()
+	if err != nil {
+		log.Println("Failed to connect to the database:", err)
+		return
+	}
+	defer db.Close()
+	var selDB *sql.Rows
+	if r.Method == "POST" {
+		region := r.FormValue("region")
+		city := r.FormValue("city")
 
-// 		fmt.Println("region ---", region)
+		fmt.Println("region ---", region)
 
-// 		if region == "region" {
-// 			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", region)
-// 			selDB = sel
-// 			if err != nil {
-// 				panic(err.Error())
-// 			}
-// 		} else if city == "city" {
-// 			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", city)
-// 			selDB = sel
-// 			if err != nil {
-// 				panic(err.Error())
-// 			}
-// 		}
+		if region == "region" {
+			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", region)
+			selDB = sel
+			if err != nil {
+				panic(err.Error())
+			}
+		} else if city == "city" {
+			sel, err := db.Query("SELECT * FROM diplom.upload WHERE region =?", city)
+			selDB = sel
+			if err != nil {
+				panic(err.Error())
+			}
+		}
 
-// 	} else {
-// 		sel, err := db.Query("SELECT * FROM diplom.upload")
-// 		selDB = sel
-// 		if err != nil {
-// 			panic(err.Error())
-// 		}
-// 	}
+	} else {
+		sel, err := db.Query("SELECT * FROM diplom.upload")
+		selDB = sel
+		if err != nil {
+			panic(err.Error())
+		}
+	}
 
-// 	userID := r.URL.Query().Get("userID")
-// 	r.Header.Set("User-ID", userID)
+	userID := r.URL.Query().Get("userID")
+	r.Header.Set("User-ID", userID)
 
-// 	// var selDB *sql.Rows
-// 	// sel, err := db.Query("SELECT * FROM diplom.upload")
-// 	// selDB = sel
-// 	// if err != nil {
-// 	// 	panic(err.Error())
-// 	// }
-// 	// defer sel.Close()
+	upld := upfile{}
+	res := []upfile{}
 
-// 	upld := upfile{}
-// 	res := []upfile{}
+	for selDB.Next() {
+		var id int
+		var title, text, region, path string
 
-// 	for selDB.Next() {
-// 		var id int
-// 		var title, text, region, path string
+		err = selDB.Scan(&id, &title, &text, &region, &path)
+		if err != nil {
+			panic(err.Error())
+		}
+		upld.ID = id
+		upld.Title = title
+		upld.Text = text
+		upld.Region = region
+		upld.Path = path
+		upld.Count = upld.Count + 1
 
-// 		err = selDB.Scan(&id, &title, &text, &region, &path)
-// 		if err != nil {
-// 			panic(err.Error())
-// 		}
-// 		upld.ID = id
-// 		upld.Title = title
-// 		upld.Text = text
-// 		upld.Region = region
-// 		upld.Path = path
+		fmt.Println("count ", upld.Count)
 
-// 		res = append(res, upld)
-// 	}
-// 	upld.Count = len(res)
+		res = append(res, upld)
+	}
+	upld.Count = len(res)
 
-// 	if upld.Count > 0 {
-// 		tmpl.ExecuteTemplate(w, "authorizedUser.html", res)
-// 	} else {
-// 		tmpl.ExecuteTemplate(w, "authorizedUser.html", nil)
-// 	}
+	if upld.Count > 0 {
+		tmpl.ExecuteTemplate(w, "news.html", res)
+	} else {
+		tmpl.ExecuteTemplate(w, "news.html", nil)
+	}
 
-// 	db.Close()
+	db.Close()
 
-// }
+}
 func uploadFiles(w http.ResponseWriter, r *http.Request) {
 
 	db, err := dbConn()
@@ -1385,7 +1380,7 @@ func main() {
 	http.HandleFunc("/login", loginPage)
 	http.HandleFunc("/uploadfiles", uploadFiles)
 	http.HandleFunc("/uploadimage", AdminHandler)
-	// http.HandleFunc("/home", main_page)
+	http.HandleFunc("/home", News)
 	http.Handle("/chat", &templateHandler{filename: "chat.html"})
 	http.Handle("/room", r)
 	http.HandleFunc("/profile", AdminHandler)
