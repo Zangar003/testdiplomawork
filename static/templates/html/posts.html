@@ -296,6 +296,7 @@
                                     <th scope="col">title</th>
                                     <th scope="col">region</th>
                                     <th scope="col">image path</th>
+                                    <th>read more</th>
                                   </tr>
                                 </thead>
                                 {{ range . }}
@@ -310,6 +311,7 @@
                                     <td>{{ .Path }}</td>
                                    
                                     <td><a href="/delete?id={{ .ID }}" onclick="return confirm('Are you sure you want to Drop  Post?')" > Delete</a></td>
+                                    <td><a href="/buy?id={{ .ID }}"  type="submit"  id="regionButton"  >Read post</a></td>
                                   </tr>
                           
                                 </tbody> 
