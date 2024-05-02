@@ -544,6 +544,26 @@ type upfile2 struct {
 	Path   string
 	Count  int
 }
+type udp struct {
+	ID     int
+	Title  string
+	Text   string
+	Region string
+	Path   string
+	Count  int
+}
+type comm struct {
+	ID      int
+	Author  string
+	Comment string
+}
+type TemplateData struct {
+	UploadData  []upfile2
+	UploadData2 []udp
+	UploadData3 []comm
+}
+
+var tmpl0 = template.Must(template.ParseGlob("static/templates/watch_news/*.html"))
 
 func WatchPost(w http.ResponseWriter, r *http.Request) {
 	db, err := dbConn()
@@ -562,10 +582,38 @@ func WatchPost(w http.ResponseWriter, r *http.Request) {
 	}
 	defer sel.Close()
 
-	upld := upfile2{}
-	res := []upfile2{}
-
+	// upld := upfile2{}
+	// res := []upfile2{}
+	uploadData := []upfile2{}
+	var mainid int
 	for selDB.Next() {
+		var upld upfile2
+		var id int
+		var title, text, region, path string
+
+		err = selDB.Scan(&id, &title, &text, &region, &path)
+		if err != nil {
+			panic(err.Error())
+		}
+		mainid = id
+		upld.ID = id
+		upld.Title = title
+		upld.Text = text
+		upld.Region = region
+		upld.Path = path
+
+		uploadData = append(uploadData, upld)
+	}
+	/* -------- */
+	sel2, err2 := db.Query("SELECT * FROM diplom.upload")
+	selDB = sel2
+	if err2 != nil {
+		panic(err.Error())
+	}
+
+	uploadData2 := []udp{}
+	for selDB.Next() {
+		var upld udp
 		var id int
 		var title, text, region, path string
 
@@ -578,12 +626,42 @@ func WatchPost(w http.ResponseWriter, r *http.Request) {
 		upld.Text = text
 		upld.Region = region
 		upld.Path = path
+		upld.Count = upld.Count + 1
+		uploadData2 = append(uploadData2, upld)
 
-		res = append(res, upld)
+	}
+	/* -------- */
+	sel3, err3 := db.Query("SELECT * FROM diplom.comment where id = ?", mainid)
+	selDB = sel3
+	if err3 != nil {
+		panic(err.Error())
+	}
+
+	uploadData3 := []comm{}
+	for selDB.Next() {
+		var upld comm
+		var id int
+		var author, comment string
+
+		err = selDB.Scan(&id, &author, &comment)
+		if err != nil {
+			panic(err.Error())
+		}
+		upld.ID = id
+		upld.Author = author
+		upld.Comment = comment
+
+		uploadData3 = append(uploadData3, upld)
+
+	}
+	templateData := TemplateData{
+		UploadData:  uploadData,
+		UploadData2: uploadData2,
+		UploadData3: uploadData3,
 	}
 
 	fmt.Println("id ", b)
-	tmpl.ExecuteTemplate(w, "WatchPost.html", res)
+	tmpl0.ExecuteTemplate(w, "single_page.html", templateData)
 	defer db.Close()
 
 }
@@ -1354,7 +1432,36 @@ func mainindex(w http.ResponseWriter, r *http.Request, userID string) {
 	}
 
 }
+func Comments(w http.ResponseWriter, r *http.Request) {
 
+	db, err := dbConn()
+	if err != nil {
+		log.Println("Failed to connect to the database:", err)
+		return
+	}
+	if r.Method != "POST" {
+
+		http.ServeFile(w, r, "static/templates/watch_news/single_page.html")
+		return
+	}
+	id := r.FormValue("postId")
+	author := r.FormValue("author")
+	comment := r.FormValue("comment")
+
+	insForm, err := db.Prepare("INSERT INTO diplom.comment(id, author, comment) VALUES(?,?,?)")
+	if err != nil {
+		panic(err.Error())
+	} else {
+		log.Println("data insert successfully . . .")
+	}
+	insForm.Exec(id, author, comment)
+
+	log.Printf("Successfully Uploaded File\n")
+	defer db.Close()
+
+	http.Redirect(w, r, "/buy?id="+id, 301)
+
+}
 func main() {
 
 	db, err := dbConn()
@@ -1406,7 +1513,7 @@ func main() {
 	http.HandleFunc("/ready", Ready)
 	http.HandleFunc("/admin_watch_post", AdminWatchPost)
 	http.HandleFunc("/admin_index", AdminIndex)
-
+	http.HandleFunc("/comments", Comments)
 	go r.run()
 	log.Println("Starting web server on", *addr)
 	log.Println("Server started on: http://localhost:8000")

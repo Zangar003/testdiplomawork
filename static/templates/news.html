@@ -34,8 +34,8 @@
     {{ range . }}
     
     
-      {{ if eq .Count 1  }}
-        <div class="item-1">
+      
+        <div class="item-{{ .Count }}">
           <a href="/buy?id={{ .ID }}" class="card">
             <div class="thumb" style="background-image: url('{{ .Path }}');"></div>
             <article>
@@ -44,17 +44,6 @@
             </article>
           </a>
         </div>
-        {{ else }}
-        <div class="item-'{{ .Count }}'">
-          <a href="/buy?id={{ .ID }}" class="card">
-            <div class="thumb" style="background-image: url('{{ .Path }}');"></div>
-            <article>
-              <h1 class="newsH1">{{ .Title }}</h1>
-              <span class="newsSpan">{{ .Region }}</span>
-            </article>
-          </a>
-        </div>
-        {{ end }}
       {{ end }}
     </div>
     

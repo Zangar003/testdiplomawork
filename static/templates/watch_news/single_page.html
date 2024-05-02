@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Bootstrap News Template - Free HTML Templates" name="keywords">
+        <meta content="Bootstrap News Template - Free HTML Templates" name="description">
+
+        <!-- Favicon -->
+        <link href="static/templates/watch_news/img/favicon.ico" rel="icon">
+        
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet"> 
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="static/templates/watch_news/lib/slick/slick.css" rel="stylesheet">
+        <link href="static/templates/watch_news/lib/slick/slick-theme.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <!-- Template Stylesheet -->
+        <link href="static/templates/watch_news/css/style.css" rel="stylesheet">
+        <style>
+            /* Container */
+#comment-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Inputs */
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Comments List */
+#comments-list {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Individual Comment */
+.comment {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.comment .author {
+  font-weight: bold;
+}
+
+.comment .date {
+  font-size: 12px;
+  color: #666;
+}
+
+.comment .text {
+  margin-top: 5px;
+}
+        </style>
+    </head>
+
+    <body>
+        <div class="w3-top w3-bar w3-blue">
+            <a href="/home" class="w3-bar-item w3-button">Qoldau</a>
+           
+        </div>
+        
+        
+       
+
+       
+        
+        
+        <!-- Single News Start-->
+        <div class="single-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        {{ range  .UploadData }}
+                        <div class="sn-container">
+
+                            <div class="sn-img">
+                                <img src="{{ .Path }}" />
+                            </div>
+                            <div class="sn-content">
+                                <h1 class="sn-title">{{ .Title }}   </h1>
+                                <p>
+                                    {{ .Text}}
+                                </p>
+                                <p>Адресс: {{ .Region }}</p>
+                                
+                            </div>
+                        </div>
+                        {{ end }}
+
+                        
+                        <div class="sn-related">
+                            <h2>Related News</h2>
+                            <div class="row sn-slider">
+                                {{ range .UploadData2 }}
+                                <div class="col-md-4">
+                                    <div class="sn-img">
+                                        <img src="{{ .Path }}" height="200" />
+                                        <div class="sn-title">
+                                            <a href="/buy?id={{ .ID }}">{{ .Title}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="sidebar">
+                            
+
+                            <div class="sidebar-widget">
+                                <h2 class="sw-title">News Category</h2>
+                                <div class="category">
+                                    <ul>
+                                        <li><a href="">National</a><span>(98)</span></li>
+                                        <li><a href="">International</a><span>(87)</span></li>
+                                        <li><a href="">Economics</a><span>(76)</span></li>
+                                        <li><a href="">Politics</a><span>(65)</span></li>
+                                        <li><a href="">Lifestyle</a><span>(54)</span></li>
+                                        <li><a href="">Technology</a><span>(43)</span></li>
+                                        <li><a href="">Trades</a><span>(32)</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sidebar-widget">
+                                {{ range  .UploadData }}
+                                <h1>Comments</h1>
+                                <form id="comment-form" method="post" action="/comments" enctype="multipart/form-data">
+                                    <label for="author">Name:</label>
+                                    <input type="text" id="author" name="author" required>
+                                    <br>
+                                    <label for="comment">Comment:</label>
+                                    <textarea id="comment" name="comment" required></textarea>
+                                    <br>
+                                    <input type="hidden" name="postId" value="{{ .ID }}">
+                                    <button type="submit">Submit Comment</button>
+                                </form>
+                                {{ end }}
+
+                                {{ range .UploadData3 }}
+                                <div id="comments-list">
+                                    <h1>Автор: {{ .Author }}</h1>
+                                    <P>коментарии:</P>
+                                    <p>{{ .Comment }}</p>
+                                </div>
+                                {{ end }}
+  
+                            </div>
+
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <script>
+            // Get DOM elements
+            const commentForm = document.getElementById('comment-form');
+            const commentsList = document.getElementById('comments-list');
+      
+            // Array to store comments
+            let comments = [];
+      
+            // Function to render comments
+            function renderComments() {
+                commentsList.innerHTML = '';
+                comments.forEach((comment, index) => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
+                    commentDiv.innerHTML = `
+                        <div class="comment-author">${comment.author}</div>
+                        <div class="comment-text">${comment.text}</div>
+                    `;
+                    commentsList.appendChild(commentDiv);
+                });
+            }
+      
+            // Handle form submission
+            commentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const author = document.getElementById('author').value;
+                const text = document.getElementById('comment').value;
+                comments.push({ author, text });
+                renderComments();
+                commentForm.reset();
+            });
+        </script>
+    -->
+        
+       
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="static/templates/watch_news/lib/easing/easing.min.js"></script>
+        <script src="static/templates/watch_news/lib/slick/slick.min.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="static/templates/watch_news/js/main.js"></script>
+    </body>
+</html>

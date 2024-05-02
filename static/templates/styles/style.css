@@ -474,7 +474,7 @@ footer{
   }
 }
 
-.item-1 {
+.item-1  {
   @media (min-width: 60em) {
     grid-column: 1 / span 2;
     
@@ -483,3 +483,4 @@ footer{
     }
   }
 }
+

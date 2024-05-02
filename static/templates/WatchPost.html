@@ -37,6 +37,17 @@
       background-color: #0069d9;
       border-color: #0062cc;
     }
+    .comment {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .comment-author {
+            font-weight: bold;
+        }
+        .comment-text {
+            margin-top: 5px;
+        }
   </style>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="static/templates/styles/main1.css">
@@ -71,8 +82,58 @@
         </div>
       {{end}}
     {{end}}
-  </main>
+ 
+  <br>
+  <h1>Comments</h1>
+  
 
+  <!-- Comment form -->
+  <form id="comment-form">
+      <label for="author">Name:</label>
+      <input type="text" id="author" name="author" required>
+      <br>
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" required></textarea>
+      <br>
+      <button type="submit">Submit Comment</button>
+  </form>
+
+  <!-- Comments list -->
+  <div id="comments-list"></div>
+
+  <script>
+      // Get DOM elements
+      const commentForm = document.getElementById('comment-form');
+      const commentsList = document.getElementById('comments-list');
+
+      // Array to store comments
+      let comments = [];
+
+      // Function to render comments
+      function renderComments() {
+          commentsList.innerHTML = '';
+          comments.forEach((comment, index) => {
+              const commentDiv = document.createElement('div');
+              commentDiv.classList.add('comment');
+              commentDiv.innerHTML = `
+                  <div class="comment-author">${comment.author}</div>
+                  <div class="comment-text">${comment.text}</div>
+              `;
+              commentsList.appendChild(commentDiv);
+          });
+      }
+
+      // Handle form submission
+      commentForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const author = document.getElementById('author').value;
+          const text = document.getElementById('comment').value;
+          comments.push({ author, text });
+          renderComments();
+          commentForm.reset();
+      });
+  </script>
+ </main>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
