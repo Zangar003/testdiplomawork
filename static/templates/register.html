@@ -37,11 +37,11 @@
             <label class="form__label">Фамилия</label>
         </div>
         <div class="form__group">
-            <input name ="Iin" class="form__input" type="number" placeholder=" ">
+            <input name ="Iin" class="form__input" type="number" placeholder=" " pattern="^.{12,}$" title="IIN must be at least 12 characters long" required>
             <label class="form__label">ЖСН/ИИН</label>
         </div>
         <div class="form__group">
-            <input name ="Password" class="form__input" type="password" placeholder=" ">
+            <input name ="Password" class="form__input" type="password" placeholder=" "  pattern="^.{9,}$" title="Password must be at least 12 characters long" required>
             <label class="form__label">Пароль</label>
         </div>
         <div class="form__group">
