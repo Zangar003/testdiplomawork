@@ -344,8 +344,19 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	t.templ.Execute(w, r)
 
 }
+
+//	func dbConn() (*sql.DB, error) {
+//		db, err := sql.Open("mysql", "root:root@/diplom")
+//		if err != nil {
+//			return nil, err
+//		}
+//		fmt.Println("SQL connected")
+//		return db, nil
+//	}
 func dbConn() (*sql.DB, error) {
-	db, err := sql.Open("mysql", "root:root@/diplom")
+	// Replace "your_username", "your_password", "your_server_host", and "your_database_name" with your actual database details
+	db, err := sql.Open("mysql", "username:123@tcp(167.172.239.19:3306)/diplom")
+
 	if err != nil {
 		return nil, err
 	}
