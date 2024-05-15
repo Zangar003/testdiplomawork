@@ -679,12 +679,8 @@ func WatchPost(w http.ResponseWriter, r *http.Request) {
 
 // google login
 var googleOauthConfig = &oauth2.Config{
-<<<<<<< HEAD
-	RedirectURL: "https://localhost:8000/auth/google/callback",
+	RedirectURL: "http://localhost:8000/auth/google/callback",
 
-=======
-	RedirectURL:  "https://localhost:8000/auth/google/callback",
->>>>>>> 9fefd0f38b5193deac94c7751df3ff830f002c27
 	ClientID:     os.Getenv("GOOGLE_OAUTH_CLIENT_ID"),
 	ClientSecret: os.Getenv("GOOGLE_OAUTH_CLIENT_SECRET"),
 	Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
