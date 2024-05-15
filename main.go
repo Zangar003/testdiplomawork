@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"flag"
 	"fmt"
+	"os"
 
 	"io/ioutil"
 	"log"
@@ -21,8 +22,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/sessions"
 	"golang.org/x/crypto/bcrypt"
-
-	"os"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
@@ -680,8 +679,8 @@ func WatchPost(w http.ResponseWriter, r *http.Request) {
 
 // google login
 var googleOauthConfig = &oauth2.Config{
-	// RedirectURL:  "http://localhost:8000/auth/google/callback",
-	RedirectURL:  os.Getenv("GOOGLE_OAUTH_REDIRECT_URL"),
+	RedirectURL: "http://localhost:8000/auth/google/callback",
+
 	ClientID:     os.Getenv("GOOGLE_OAUTH_CLIENT_ID"),
 	ClientSecret: os.Getenv("GOOGLE_OAUTH_CLIENT_SECRET"),
 	Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
