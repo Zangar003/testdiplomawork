@@ -355,7 +355,7 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func dbConn() (*sql.DB, error) {
 	// Replace "your_username", "your_password", "your_server_host", and "your_database_name" with your actual database details
-	db, err := sql.Open("mysql", "username:123@tcp(167.172.239.19:3306)/diplom")
+	db, err := sql.Open("mysql", "jak:123@tcp(192.81.213.81:3306)/diplom")
 
 	if err != nil {
 		return nil, err
